@@ -1,7 +1,8 @@
 import React from "react";
 import Container from "./Container";
+import "./MealCard.css";
 
-function MealCard({ data }) {
+function MealCard({ data, mealNr }) {
   // console.log("props day", data);
 
   const card = data.map((item) => {
@@ -10,9 +11,9 @@ function MealCard({ data }) {
     return <Container key={item._id} props={item} />;
   });
   return (
-    <div>
-      <h2>Meal:</h2>
-      <div>{card}</div>
+    <div className="container-meal-card">
+      <h2>Meal {mealNr}</h2>
+      <div className="product-list">{card}</div>
     </div>
   );
 }

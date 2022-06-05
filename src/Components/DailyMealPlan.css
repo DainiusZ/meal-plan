@@ -1,0 +1,14 @@
+.weekday {
+  margin: 0 1.5rem;
+}
+footer {
+  margin-top: 64rem;
+  padding: 2rem 1rem;
+}
+
+.container-daily-card {
+  display: grid;
+  grid-template-columns: 18rem;
+  grid-template-rows: 6rem auto 8rem;
+  padding: 0 0.7rem;
+}

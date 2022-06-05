@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../useFetch";
+import "./App.css";
 import filterApiData from "./filterApiData";
 import makeMealPlan from "./makeMealPlan";
 import DailyMealPlan from "./Components/DailyMealPlan";
@@ -41,11 +42,6 @@ function App() {
     return <DailyMealPlan props={dailyMealPlan} day={item} />;
   });
 
-  // const [dailyMealPlan, setDailyMealPlan] = useState(null);
-  // const [dailyMealPlan2, setDailyMealPlan2] = useState(null);
-  // console.log("daily plan", dailyMealPlan);
-  // console.log("daily plan2", dailyMealPlan2);
-
   useEffect(() => {
     if (!loading) {
       setDataFiltered(true);
@@ -54,9 +50,7 @@ function App() {
   return !isDataFiltered ? (
     <h1>Loading...</h1>
   ) : (
-    <div className="App" style={{ display: "flex" }}>
-      {ats}
-    </div>
+    <div className="App">{ats}</div>
   );
 }
 
