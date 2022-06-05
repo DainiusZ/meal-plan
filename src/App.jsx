@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../useFetch";
-import filterApiData from "./filterApiData";
 const dataUrl = "https://tietoevry-mealplan-api.herokuapp.com/api/meals";
 
 function App() {
-  const [isDataFiltered, setDataFiltered] = useState(false);
+  const [isDataReceived, setDataReceived] = useState(false);
 
   const { data, loading } = useFetch(dataUrl);
 
   useEffect(() => {
     if (!loading) {
-      const filteredApiData = filterApiData(data);
-      console.log("useeffect filtereddata", filteredApiData);
-      // setApiData(filteredApiData);
-
-      setDataFiltered(true);
+      setDataReceived(true);
     }
   }, [data, loading]);
 
-  return !isDataFiltered ? (
+  return !isDataReceived ? (
     <h1>Loading...</h1>
   ) : (
     <div className="App">
