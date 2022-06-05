@@ -14,10 +14,9 @@ function DailyMealPlan({ props, day }) {
 
   return (
     <div className="container-daily-card">
-      <header></header>
-      <div className="weekday">
+      <header>
         <h1>{day}</h1>
-      </div>
+      </header>
       <main className="main-section">{mealArray}</main>
       <footer>
         <h2>Total Calories: {totalKcal}</h2>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useFetch from "../useFetch";
+import GoalsInput from "./Components/GoalsInput";
 import "./App.css";
 import filterApiData from "./filterApiData";
 import makeMealPlan from "./makeMealPlan";
@@ -19,15 +20,16 @@ const weekdays = [
 
 function App() {
   const [isDataFiltered, setDataFiltered] = useState(false);
+  const [dailyKcalTarget, setDailyKcalTarget] = useState(0);
 
   const { data, loading } = useFetch(dataUrl);
 
   const ats = weekdays.map((item) => {
     let [dailyMealPlan, setDailyMealPlan] = useState(null);
-    console.log("dailymeal", dailyMealPlan);
+    // console.log("dailymeal", dailyMealPlan);
 
     useEffect(() => {
-      console.log("loop", item);
+      // console.log("loop", item);
       if (!loading) {
         const filteredApiData = filterApiData(data);
         // console.log("useeffect filtereddata", filteredApiData);
@@ -38,7 +40,7 @@ function App() {
 
         // setDataFiltered(true);
       }
-    }, [data, loading]);
+    }, [data, loading, dailyKcalTarget]);
     return <DailyMealPlan props={dailyMealPlan} day={item} />;
   });
 
@@ -46,11 +48,14 @@ function App() {
     if (!loading) {
       setDataFiltered(true);
     }
-  }, [data, loading]);
+  }, [data, loading, dailyKcalTarget]);
   return !isDataFiltered ? (
     <h1>Loading...</h1>
   ) : (
-    <div className="App">{ats}</div>
+    <div>
+      <GoalsInput setKcal={setDailyKcalTarget} />
+      <div className="App">{ats}</div>
+    </div>
   );
 }
 
