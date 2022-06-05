@@ -1,7 +1,7 @@
 import React from "react";
 import MealCard from "./MealCard";
 
-function DailyMealPlan({ props }) {
+function DailyMealPlan({ props, day }) {
   const { dailyMealsArray, totalKcal, totalProtein, totalCarbs, totalFat } =
     props;
 
@@ -14,7 +14,7 @@ function DailyMealPlan({ props }) {
   return (
     <div>
       <header>
-        <h1>Daily Meal</h1>
+        <h1>{day}</h1>
       </header>
       <main>{mealArray}</main>
       <footer>
