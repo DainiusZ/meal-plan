@@ -1,3 +1,9 @@
+# production
+/build
+
+# misc
+.env.local
+
 # Logs
 logs
 *.log
