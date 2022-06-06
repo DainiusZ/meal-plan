@@ -7,7 +7,6 @@ import makeMealPlan from "./makeMealPlan";
 import DailyMealPlan from "./Components/DailyMealPlan";
 const dataUrl = "https://tietoevry-mealplan-api.herokuapp.com/api/meals";
 
-const dailyKcalTarget = 1900;
 const weekdays = [
   "Monday",
   "Tuesday ",
@@ -26,19 +25,12 @@ function App() {
 
   const ats = weekdays.map((item) => {
     let [dailyMealPlan, setDailyMealPlan] = useState(null);
-    // console.log("dailymeal", dailyMealPlan);
 
     useEffect(() => {
-      // console.log("loop", item);
       if (!loading) {
         const filteredApiData = filterApiData(data);
-        // console.log("useeffect filtereddata", filteredApiData);
-        // setApiData(filteredApiData);
         let mealplan = makeMealPlan(filteredApiData, dailyKcalTarget);
-        // console.log("useeffect makemeal", mealplan);
         setDailyMealPlan(mealplan);
-
-        // setDataFiltered(true);
       }
     }, [data, loading, dailyKcalTarget]);
     return <DailyMealPlan props={dailyMealPlan} day={item} />;
