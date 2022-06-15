@@ -20,25 +20,25 @@ const weekdays = [
 function App() {
   const [isDataFiltered, setDataFiltered] = useState(false);
   const [dailyKcalTarget, setDailyKcalTarget] = useState(0);
-
+  const [weeklyMealArray, setWeeklyMealArray] = useState([]);
   const { data, loading } = useFetch(dataUrl);
 
-  const ats = weekdays.map((item) => {
-    let [dailyMealPlan, setDailyMealPlan] = useState(null);
-
-    useEffect(() => {
-      if (!loading) {
-        const filteredApiData = filterApiData(data);
-        let mealplan = makeMealPlan(filteredApiData, dailyKcalTarget);
-        setDailyMealPlan(mealplan);
-      }
-    }, [data, loading, dailyKcalTarget]);
-    return <DailyMealPlan props={dailyMealPlan} day={item} />;
+  const displayPlan = weeklyMealArray.map((item) => {
+    return <DailyMealPlan props={item} day={item.weekday} />;
   });
 
   useEffect(() => {
+    let dailyMealPlan = [];
     if (!loading) {
       setDataFiltered(true);
+      weekdays.forEach((item) => {
+        const filteredApiData = filterApiData(data);
+        let mealplan = makeMealPlan(filteredApiData, dailyKcalTarget);
+        mealplan.weekday = item;
+        dailyMealPlan.push(mealplan);
+      });
+
+      setWeeklyMealArray(dailyMealPlan);
     }
   }, [data, loading, dailyKcalTarget]);
   return !isDataFiltered ? (
@@ -46,7 +46,7 @@ function App() {
   ) : (
     <div>
       <GoalsInput setKcal={setDailyKcalTarget} />
-      <div className="App">{ats}</div>
+      <div className="App">{displayPlan}</div>
     </div>
   );
 }
